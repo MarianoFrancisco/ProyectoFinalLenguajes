@@ -25,7 +25,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.mycompany.proyecto1lenguajes.PracticaLenguajes</mainClass>
+                            <mainClass>com.mycompany.proyectoFinallenguajes.FinalLenguajes</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
