@@ -830,7 +830,8 @@ public class Inicio extends javax.swing.JFrame {
             //mientras existe linea leerá
             while ((linea = leerTA.readLine()) != null) {
                 //reseteamos componentes de datos
-                contador++;
+                if(linea.length()>0){
+                    contador++;
                 movilizar.setFila(contador);
                 movilizar.setColumna(0);
                 movilizar.setCaracteresUsados(0);
@@ -869,14 +870,35 @@ public class Inicio extends javax.swing.JFrame {
                             } catch (ClassNotFoundException ex) {
                                 Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
                             }
+                        }else{
+                            movilizar.setCaracteresUsados(2);
+                            movilizar.setColumna(1);
+                            movilizar.setCadenaUsada("/"+verificadorLinea);
+                            movilizar.setCondiconalError(1);
+                            verificadorLinea=linea.charAt(2);
+                            reduccionLinea=linea.substring(movilizar.getCaracteresUsados(), linea.length());
+                            pasadorDatos(linea,reduccionLinea,verificadorLinea);//sirve para enviar datos a instanciador de repitencia
+                            while(movilizar.getCaracteresUsados()<linea.length()){//repetimos instancia de automatas
+                                CodigoCondicionalRepetidoAutomata.codigoAutomataRepitencia(instanciadores.getLinea(), instanciadores.getVerificadorLinea(), instanciadores.getReduccionLinea(), movilizar.getCaracteresUsados());
+                            }
                         }
                     }
-                }else if(comprobarVerificador.equals("\""  )){
+                }else if(comprobarVerificador.equals("\"" )){
                     Literal.literalInicio(linea);
                     reduccionLinea=linea.substring(movilizar.getCaracteresUsados(), linea.length());
                     pasadorDatos(linea,reduccionLinea,verificadorLinea);//sirve para enviar datos a instanciador de repitencia
                     while(movilizar.getCaracteresUsados()<linea.length()){//repetimos instancia de automatas
                         CodigoCondicionalRepetidoAutomata.codigoAutomataRepitencia(instanciadores.getLinea(), instanciadores.getVerificadorLinea(), instanciadores.getReduccionLinea(), movilizar.getCaracteresUsados());
+                    }
+                }else if(Character.isSpaceChar(verificadorLinea)){
+                    movilizar.setCadenaUsada(Character.toString(verificadorLinea));
+                    movilizar.setCaracteresUsados(1);
+                    if(linea.length()>1){
+                        reduccionLinea=linea.substring(movilizar.getCaracteresUsados(), linea.length());
+                        pasadorDatos(linea,reduccionLinea,verificadorLinea);//sirve para enviar datos a instanciador de repitencia
+                    }
+                    while(movilizar.getCaracteresUsados()<linea.length()){//repetimos instancia de automatas
+                            CodigoCondicionalRepetidoAutomata.codigoAutomataRepitencia(instanciadores.getLinea(), instanciadores.getVerificadorLinea(), instanciadores.getReduccionLinea(), movilizar.getCaracteresUsados());
                     }
                 }
                 //Si es +-*/ entre signos parecidos significa que entra a operacion
@@ -890,7 +912,6 @@ public class Inicio extends javax.swing.JFrame {
                         reduccionLinea=linea.substring(movilizar.getCaracteresUsados(), linea.length());
                         pasadorDatos(linea,reduccionLinea,verificadorLinea);//sirve para enviar datos a instanciador de repitencia
                         //señalizaos error
-
                         while(movilizar.getCaracteresUsados()<linea.length()){//repetimos instancia de automatas
                             CodigoCondicionalRepetidoAutomata.codigoAutomataRepitencia(instanciadores.getLinea(), instanciadores.getVerificadorLinea(), instanciadores.getReduccionLinea(), movilizar.getCaracteresUsados());
                         }
@@ -900,6 +921,8 @@ public class Inicio extends javax.swing.JFrame {
                         Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+                }
+                
             }
             if(movilizar.getCondiconalError()==1){
                 //si hay error solo carga esta tabla
