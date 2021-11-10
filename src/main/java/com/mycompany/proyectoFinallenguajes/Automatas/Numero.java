@@ -35,10 +35,10 @@ public class Numero {
     int caracter=0, iterador = 0,estadoPresente=0, estadoIr=0,resultado=0,enviarReporte=0;//enteros
     char [] caract;//caracter
     
-    public static void numeroDecimalInicio(String linea,JTextArea movimiento){
+    public static void numeroInicio(String linea){
         //incializamos  y creamos valores
         Numero numero = new Numero();
-        numero.inicializacion(linea,movimiento);
+        numero.inicializacion(linea);
         
     }
     public int conseguirSiguiente(int estadoPasable,int caracter){
@@ -67,7 +67,7 @@ public class Numero {
         }
         return resultado;
     }
-    public void inicializacion(String linea,JTextArea movimiento){
+    public void inicializacion(String linea){
         //reseteamos variables
         movilizar.setHayEspacio(0);
         enviarReporte=0;
@@ -88,13 +88,11 @@ public class Numero {
                 //llamamos al estado donde se va y pasamos caracter en determinado valor y el estado donde nos encontramos
                 estadoIr= conseguirSiguiente(estadoPresente,comprobarExistencia(caract[iterador]));
                 //mensaje de movilidad
-                movimiento.setText(movimiento.getText()+"Me movi de estado --> "+estadoPresente+" hacia --> "+estadoIr+" con caracter: "+caract[iterador]+"\n");
                 estadoPresente=estadoIr;
         }
         
         if(resultado==2){
             //si obtenemos error notificamos y modificamos que acceda a tabla error
-            movimiento.setText(movimiento.getText()+"------------Error------------ \n");
             enviarReporte=1;
         }
         //estructuramos cadena usada
@@ -106,7 +104,6 @@ public class Numero {
         if(comprobarPunto.equals(".")){
             enviarReporte=1;
         }
-        movimiento.setText(movimiento.getText()+"------------ Al usar "+numeroNegativoTotal+" ----------\n");
         //modificamos valores a enviar a tablas
         movilizar.setColumna(iterador);
         movilizar.setCaracteresUsados(movilizar.getCaracteresUsados()+iterador);

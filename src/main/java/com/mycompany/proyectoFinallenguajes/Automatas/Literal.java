@@ -67,10 +67,10 @@ public class Literal {
     int caracter=0, iterador = 0,estadoPresente=0, estadoIr=0,resultado=0,enviarReporte=0;//enteros
     char [] caract;//caracter
     
-    public static void literalInicio(String linea,JTextArea movimiento){
+    public static void literalInicio(String linea){
         //incializamos  y creamos valores
         Literal literal = new Literal();
-        literal.inicializacion(linea,movimiento);
+        literal.inicializacion(linea);
         
     }
     public int conseguirSiguiente(int estadoPasable,int caracter){
@@ -137,7 +137,7 @@ public class Literal {
         
         return resultado;
     }
-    public void inicializacion(String linea,JTextArea movimiento){
+    public void inicializacion(String linea){
         //reseteamos variables
         movilizar.setHayEspacio(0);
         enviarReporte=0;
@@ -150,7 +150,6 @@ public class Literal {
                 //llamamos al estado donde se va y pasamos caracter en determinado valor y el estado donde nos encontramos
                 estadoIr= conseguirSiguiente(estadoPresente,comprobarExistencia(caract[iterador],linea));
                 //mensaje de movilidad
-                movimiento.setText(movimiento.getText()+"Me movi de estado --> "+estadoPresente+" hacia --> "+estadoIr+" con caracter: "+caract[iterador]+"\n");
                 estadoPresente=estadoIr;
         
         //estructuramos cadena usada
@@ -158,9 +157,8 @@ public class Literal {
 
         if(resultado==18){
             //si obtenemos error notificamos y modificamos que acceda a tabla error
-            movimiento.setText(movimiento.getText()+"------------Error------------ \n");
             enviarReporte=1;
-        }
+        }   
         iterador++;
         }
         resultado=18;
@@ -169,14 +167,12 @@ public class Literal {
         }
         if(resultado==18){
             //si obtenemos error notificamos y modificamos que acceda a tabla error
-            movimiento.setText(movimiento.getText()+"------------Error------------ \n");
             enviarReporte=1;
         }
         String comprobarPunto=Character.toString(caract[iterador-1]);
         if(comprobarPunto.equals(".")){
             enviarReporte=1;
         }
-        movimiento.setText(movimiento.getText()+"------------ Al usar "+valorTotal+" ----------\n");
         //modificamos valores a enviar a tablas
         movilizar.setColumna(iterador);
         movilizar.setCaracteresUsados(movilizar.getCaracteresUsados()+iterador);
@@ -195,12 +191,8 @@ public class Literal {
                 Logger.getLogger(Identificador.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
-            //identificamos si es decimal o numero
-            if (valorTotal.contains("-")) {
-                    movilizar.setTokenProviniente("Numero Negativo");
-            }else{
-                    movilizar.setTokenProviniente("Numero");
-            }  
+            //identificamos
+            movilizar.setTokenProviniente("Literal");
             try {
                 //cargamos reporte tabla lexema y token
                 cargarToken.cargarToken();

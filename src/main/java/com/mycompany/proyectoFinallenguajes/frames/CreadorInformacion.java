@@ -44,7 +44,7 @@ public class CreadorInformacion extends javax.swing.JFrame {
         setTitle("Acerca de Programa");
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 0));
         jPanel1.setForeground(new java.awt.Color(153, 255, 255));
 
         jLabel3.setFont(new java.awt.Font("Engravers MT", 0, 12)); // NOI18N

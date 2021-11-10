@@ -7,6 +7,7 @@ package com.mycompany.proyectoFinallenguajes;
 
 import com.mycompany.proyectoFinallenguajes.Controladores.DatosInstanciadores;
 import com.mycompany.proyectoFinallenguajes.Controladores.MovilizadorDatos;
+import com.mycompany.proyectoFinallenguajes.Controladores.SegundoMovilizadorDatos;
 import com.mycompany.proyectoFinallenguajes.frames.BusquedaCadena;
 import com.mycompany.proyectoFinallenguajes.frames.Inicio;
 import com.mycompany.proyectoFinallenguajes.frames.RecuperacionErrores;
@@ -28,6 +29,7 @@ public class FinalLenguajes {
             public void run() {
                 //inicializamos estructuradores de datos
                 MovilizadorDatos.crearMovilizador();//llamamos a movilizar datos
+                SegundoMovilizadorDatos.crearSegundoMovilizador();
                 DatosInstanciadores.crearDatosInstanciadores();//llamamos instanciadores
                 BusquedaCadena.iniciarBusqueda();  //creamos frame de busqueda
                 RecuperacionErrores.iniciarRecuperacion(); //creamos frame de recuperacion errores

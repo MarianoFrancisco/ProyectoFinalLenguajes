@@ -37,10 +37,10 @@ public class Identificador {
     int caracter=0, iterador = 0,estadoPresente=0, estadoIr=0,resultado=0,enviarReporte=0;//enteros
     char [] caract;//caracter
 
-    public static void identificadorInicio(String linea,JTextArea movimiento){
+    public static void identificadorInicio(String linea){
         //incializamos  y creamos valores
         Identificador id = new Identificador();
-        id.inicializacion(linea,movimiento);
+        id.inicializacion(linea);
         
     }
     public int conseguirSiguiente(int estadoPasable,int caracter){
@@ -65,7 +65,7 @@ public class Identificador {
             }
         return resultado;
     }
-    public void inicializacion(String linea,JTextArea movimiento){
+    public void inicializacion(String linea){
         //reseteamos variables
         movilizar.setHayEspacio(0);
         enviarReporte=0;
@@ -86,11 +86,10 @@ public class Identificador {
                 //llamamos al estado donde se va y pasamos caracter en determinado valor y el estado donde nos encontramos
                 estadoIr= conseguirSiguiente(estadoPresente,comprobarExistencia(caract[iterador]));
                 //mensaje de movilidad
-                movimiento.setText(movimiento.getText()+"Me movi de estado --> "+estadoPresente+" hacia --> "+estadoIr+" con caracter: "+caract[iterador]+"\n");
+                
                 estadoPresente=estadoIr;
         }
         if(resultado==4){
-            movimiento.setText(movimiento.getText()+"------------Error------------ \n");
             enviarReporte=1;
         }  
         //estructuramos cadena usada
@@ -98,7 +97,7 @@ public class Identificador {
         
         iterador++;
         }
-        movimiento.setText(movimiento.getText()+"------------ Al usar "+identificadorTotal+" ----------\n");
+        
         //modificamos valores a enviar a tablas
         movilizar.setColumna(iterador);
         movilizar.setCaracteresUsados(movilizar.getCaracteresUsados()+iterador);

@@ -12,11 +12,11 @@ package com.mycompany.proyectoFinallenguajes.Controladores;
 public class MovilizadorDatos {
     //creamos variables
     private int fila,columna,caracteresUsados,condiconalError,hayEspacio,condicionalRecuperacion;
-    private String cadenaUsada,tokenProviniente,cadenaError,directorio;
+    private String cadenaUsada,tokenProviniente,cadenaError,directorio,procesoPila;
     public static MovilizadorDatos movilizar;
     //constructor para movilizarme mis datos entre clases
 
-    public MovilizadorDatos(int fila, int columna, int caracteresUsados, int condiconalError, int hayEspacio, int condicionalRecuperacion, String cadenaUsada, String tokenProviniente, String cadenaError, String directorio) {
+    public MovilizadorDatos(int fila, int columna, int caracteresUsados, int condiconalError, int hayEspacio, int condicionalRecuperacion, String cadenaUsada, String tokenProviniente, String cadenaError, String directorio, String procesoPila) {
         this.fila = fila;
         this.columna = columna;
         this.caracteresUsados = caracteresUsados;
@@ -27,10 +27,8 @@ public class MovilizadorDatos {
         this.tokenProviniente = tokenProviniente;
         this.cadenaError = cadenaError;
         this.directorio = directorio;
+        this.procesoPila = procesoPila;
     }
-
-    
-
     //creamos gets y sets para modificar y hacer llamados
     public int getFila() {
         return fila;
@@ -111,9 +109,17 @@ public class MovilizadorDatos {
     public void setDirectorio(String directorio) {
         this.directorio = directorio;
     }
+
+    public String getProcesoPila() {
+        return procesoPila;
+    }
+
+    public void setProcesoPila(String procesoPila) {
+        this.procesoPila = procesoPila;
+    }
     
     //estructuramos creador de un valor MovilizadorDatos inicializandolo
     public static void crearMovilizador(){
-         movilizar= new MovilizadorDatos(0,0,0,0,0,0,"","","","");
+         movilizar= new MovilizadorDatos(0,0,0,0,0,0,"","","","","");
     }
 }

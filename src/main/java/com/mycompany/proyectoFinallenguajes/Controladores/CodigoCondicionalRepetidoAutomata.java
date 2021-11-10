@@ -5,23 +5,19 @@
  */
 package com.mycompany.proyectoFinallenguajes.Controladores;
 
-import com.mycompany.proyectoFinallenguajes.Automatas.Identificador;
-import com.mycompany.proyectoFinallenguajes.Automatas.Numero;
 import static com.mycompany.proyectoFinallenguajes.Controladores.DatosInstanciadores.instanciadores;
 import static com.mycompany.proyectoFinallenguajes.Controladores.MovilizadorDatos.movilizar;
-import static com.mycompany.proyectoFinallenguajes.frames.Inicio.MovimientoEstado;
 import static com.mycompany.proyectoFinallenguajes.frames.Inicio.cargarError;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTextArea;
 
 /**
  *
  * @author Mariano
  */
 public class CodigoCondicionalRepetidoAutomata {
-    public static void codigoAutomataRepitencia(String linea, char verificadorLinea,String reduccionLinea,int caracteresUsados,JTextArea MovilizadorDatos){
+    public static void codigoAutomataRepitencia(String linea, char verificadorLinea,String reduccionLinea,int caracteresUsados){
         //creamos metodo para reutilizacion de codigo para identificador automatas, reduccion linea es para acortar nuestro dato
         verificadorLinea=reduccionLinea.charAt(0);
         //si contiene espacio avanzamos un caracter
@@ -36,11 +32,9 @@ public class CodigoCondicionalRepetidoAutomata {
         String comprobarPunto=Character.toString(verificadorLinea);
         //si es letra ingresa a automata identificador
         if(Character.isLetter(verificadorLinea)){
-            Identificador.identificadorInicio(reduccionLinea,MovimientoEstado);
             reduccionLinea=linea.substring(movilizar.getCaracteresUsados(), linea.length());
         }//Si es digito ingresamos a posibilidad de numero o digito
         else if(Character.isDigit(verificadorLinea)){
-            Numero.numeroDecimalInicio(reduccionLinea, MovimientoEstado);
             reduccionLinea=linea.substring(movilizar.getCaracteresUsados(), linea.length());
         }//Si es +-*/ entre signos parecidos significa que entra a operacion
         else{
@@ -51,7 +45,7 @@ public class CodigoCondicionalRepetidoAutomata {
                 cargarError.cargarReporte();
                 movilizar.setCondiconalError(1);
                 //señalizaos error
-                MovimientoEstado.setText(MovimientoEstado.getText()+"------------Error------------ al usar "+movilizar.getCadenaUsada()+"\n");
+                
                 reduccionLinea=linea.substring(movilizar.getCaracteresUsados(), linea.length());
             } catch (IOException ex) {
                 Logger.getLogger(CodigoCondicionalRepetidoAutomata.class.getName()).log(Level.SEVERE, null, ex);
